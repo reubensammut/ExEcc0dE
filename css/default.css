@@ -65,3 +65,38 @@ div.info {
 p {
     text-align: justify;
 }
+
+blockquote {
+	color: rgb(87, 77, 77); 
+	font-family: 'Droid Serif', 'Times New Roman', serif;
+	font-size: 14px;
+	font-style: italic;
+	line-height: 28px;
+	margin-bottom: 21px;
+}
+
+blockquote:before {
+	font-family: 'Droid Serif';
+	color: rgb(128, 127, 127);
+	display: block;
+	font-size: 48px;
+	font-weight: bold;
+	left: -40px;
+	line-height: 48px;
+	content: "\"";
+	position: absolute;
+}
+
+.figure {
+    border: 1px solid #888;
+	padding: 6px;
+}
+
+.figure p {
+	text-align: center;
+}
+
+.figure img {
+	width: 100%;
+	display: block;
+}
