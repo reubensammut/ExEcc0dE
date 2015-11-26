@@ -2,7 +2,9 @@ body {
     color: black;
     font-size: 16px;
     margin: 0px auto 0px auto;
-    width: 600px;
+    width: 800px;
+	font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
+	text-decoration: none;
 }
 
 div#header {
@@ -12,7 +14,6 @@ div#header {
 }
 
 div#logo a {
-	font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
 	text-decoration: none;
 }
 
@@ -66,9 +67,8 @@ p {
     text-align: justify;
 }
 
-blockquote {
+blockquote p {
 	color: rgb(87, 77, 77); 
-	font-family: 'Droid Serif', 'Times New Roman', serif;
 	font-size: 14px;
 	font-style: italic;
 	line-height: 28px;
@@ -76,9 +76,9 @@ blockquote {
 }
 
 blockquote:before {
-	font-family: 'Droid Serif';
 	color: rgb(128, 127, 127);
 	display: block;
+	float: left;
 	font-size: 48px;
 	font-weight: bold;
 	left: -40px;
