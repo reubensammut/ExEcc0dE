@@ -9,7 +9,7 @@ import           Hakyll
 customConfig :: Configuration
 customConfig = defaultConfiguration
     { previewHost = "0.0.0.0"
-	}
+    }
 
 main :: IO ()
 main = hakyllWith customConfig $ do
