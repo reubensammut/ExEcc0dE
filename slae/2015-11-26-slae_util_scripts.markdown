@@ -45,9 +45,9 @@ To compile sample.shell as the executable sample\_shell use
   $  compile_shell.sh sample.shell
 ~~~~~
 
-#reverse.hs
+###reverse.hs
 
-Sometimes, in shellcode development, you need to push some string on to the stack. This involves the arduous task of converting the string to its hexadecimal counterpart, reversing the hexadecimal strings, checking lengths and padding to avoid null bytes. For this task I created a simple Haskell program to do this for me. This program takes a string with an optional parameter. Should no extra parameter be given, the string is prepended with the ‘/’ character (as most of the times, you would need to push a path on the stack) until the length is a multiple of 4. The extra parameter could be one of two. In case the extra parameter is –trim, then the exact same process as above is done. However, in the end, the $esp is adjusted to ignore the prepended characters. The extra parameter could also be –trim-safe. When using this parameter, no characters are prepended to the string. Instead, when the length is not a multiple of 4, the last few bytes are pushed as follows:
+Sometimes, in shellcode development, you need to push some string on to the stack. This involves the arduous task of converting the string to its hexadecimal counterpart, reversing the hexadecimal strings, checking lengths and padding to avoid null bytes. For this task I created a simple Haskell program to do this for me. This program takes a string with an optional parameter. Should no extra parameter be given, the string is prepended with the ‘/’ character (as most of the times, you would need to push a path on the stack) until the length is a multiple of 4. The extra parameter could be one of two. In case the extra parameter is \-\-trim, then the exact same process as above is done. However, in the end, the $esp is adjusted to ignore the prepended characters. The extra parameter could also be \-\-trim-safe. When using this parameter, no characters are prepended to the string. Instead, when the length is not a multiple of 4, the last few bytes are pushed as follows:
 
 - 1 byte remaining – use push 0xNN
 - 2 bytes remaining – use push word 0xNNNN
@@ -67,6 +67,25 @@ To use the reverse program use one of the following
   $  reverse "Hello world"
   $  reverse --trim "Hello world"
   $  reverse --trim-safe "Hello world"
+~~~~~
+
+###pushprint.hs
+
+In shellcode analysis, you are sometimes required to be able to take a chunk of push statements, used to put a string on the stack, and get back the original string. Such strings are usually used as executable locations and their arguments, which would then be executed. Blindly executing these strings without knowledge of what they are could cause harm. An example of this might be removing the contents of the home directory. So, it is best if we know are the strings being pushed on to the stack. I created a script which, in essence, does the inverse of what the reverse.hs script does. It takes a list of push stataments, as they would appear disassembled, and prints the string that would be pushed on to the stack. As both the push list and bytes would be in reverse order, it also takes care of reversing the push statements and the bytes.
+
+To compile pushprint.hs use
+
+~~~~~{.shell}
+  $  ghc --make pushprint.hs
+~~~~~
+
+To use the pushprint program use it as follows:
+
+~~~~~{.shell}
+  $  echo "push 0x64
+  >  push word 0x6c72
+  >  push 0x6f77206f
+  >  push 0x6c6c6548" | pushprint
 ~~~~~
 
 These scripts can be found on [my GitHub account](http://github.com/reubensammut/SLAE32/tree/master/Scripts).
