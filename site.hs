@@ -44,10 +44,8 @@ main = hakyllWith customConfig $ do
     create ["archive.html"] $ do
         route idRoute
         compile $ do
-            --posts <- recentFirst =<< loadAll "posts/*"
             slae  <- recentFirst =<< loadAll "slae/*"
             let archiveCtx =
-                    --listField "posts" postCtx (return posts) `mappend`
                     listField "slae" postCtx (return slae) `mappend`
                     constField "title" "Archives"            `mappend`
                     defaultContext
@@ -79,4 +77,5 @@ main = hakyllWith customConfig $ do
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
+    urlField "url" `mappend`
     defaultContext
