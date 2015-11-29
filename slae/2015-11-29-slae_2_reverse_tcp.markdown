@@ -52,7 +52,7 @@ Now let's look at the running shellcode. We'll start by looking at the failure c
 Error message when connection failed to be established
 </div>
 
-Above we can the shellcode being executed while the server to connect back to was not listening on the specified port. An error message saying "[!] Connection failed" is displayed to the screen. We can also see the return code set to "1", to indicate the error. 
+Above we can see the shellcode being executed while the server with the specified IP and port was not listening on the specified port. An error message saying "[!] Connection failed" is displayed to the screen. We can also see the return code set to "1", to indicate the error. 
 
 Now we'll look at the case when the connection succeeds.
 
@@ -71,7 +71,7 @@ In note (3) we can see the shellcode running as `//bin/sh` with the interactive 
 
 Finally we can check the connections. In note (4) we see that `nc` is listening on port 1111 and our shell code (marked as `sh`) is connected to our listening `nc` server. 
 
-Using libemu, I generated another graph to see, how it handles the shellcode I created. This time, the flow of the code was much simpler than the one in assignment 1 as there was no fork in this case. However, there was a jump when the connection fails. The same problem occured with libemu showing the code for writing to the screen as a continution after the execve. The graph can be seen below 
+Using libemu, I generated another graph to see how it handles the shellcode I created. This time, the flow of the code was much simpler than the one in assignment 1 as there was no fork in this case. However, there was a jump when the connection fails. The same problem occured with libemu showing the code for writing to the screen as a continution after the execve. The graph can be seen below 
 
 <div class="figure">
 <a href="//github.com/reubensammut/SLAE32/raw/master/Assignments/02%20-%20Shell%20Reverse%20Tcp/reversetcp.png">
