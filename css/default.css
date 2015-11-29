@@ -3,8 +3,7 @@ body {
     font-size: 16px;
     margin: 0px auto 0px auto;
     width: 800px;
-	font-family: 'Droid Sans', Arial, Helvetica, sans-serif;
-	text-decoration: none;
+    text-decoration: none;
 }
 
 div#header {
@@ -67,12 +66,14 @@ p {
     text-align: justify;
 }
 
-blockquote p {
-	color: rgb(87, 77, 77); 
-	font-size: 14px;
+blockquote { 
+	border-left: 10px;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
 	font-style: italic;
+	font-size: 14px;
+	color: rgb(87, 77, 77);
 	line-height: 28px;
-	margin-bottom: 21px;
 }
 
 blockquote:before {
@@ -81,10 +82,11 @@ blockquote:before {
 	float: left;
 	font-size: 48px;
 	font-weight: bold;
+	font-style: normal;
 	left: -40px;
 	line-height: 48px;
-	content: "\"";
-	position: absolute;
+	content: open-quote;
+	margin-right: 0.25em;
 }
 
 .figure {
