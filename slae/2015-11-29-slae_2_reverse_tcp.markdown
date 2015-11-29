@@ -43,13 +43,18 @@ In the case when the connection has failed, I decided to print an error message 
 
 ###Testing
 
-Failure case:
+Now let's look at the running shellcode. We'll start by looking at the failure case. This is the case when the reverse tcp shellcode is not able to connect back to the requested machine. As described previously, it was decided that for this assignment, the shellcode should print an error message to the screen and exit. Below is a screenshot of the shellcode running and failing to connect back.
+
 <div class="figure">
 <a href="/images/slae_02-02_connect_failed.png">
 <img src="/images/slae_02-02_connect_failed.png" />
 </a>
-Error message on connection not established
+Error message when connection failed to be established
 </div>
+
+Above we can the shellcode being executed while the server to connect back to was not listening on the specified port. An error message saying "[!] Connection failed" is displayed to the screen. We can also see the return code set to "1", to indicate the error. 
+
+Now we'll look at the case when the connection succeeds.
 
 <div class="figure">
 <a href="/images/slae_02-03_run_shellcode.png">
@@ -57,3 +62,27 @@ Error message on connection not established
 </a>
 A connected reverse tcp shell
 </div>
+
+We start off by creating a server and make it listen on the port we specified in the shellcode. In this case we'll use nc as the server and make it listen to port 1111 as shown in the above screenshot in note (1). Once we start the shellcode, we get the prompt in the nc. The `-v` flag for the `nc` command shows us when the client connected. In this case, it would be the shellcode that is connecting back to us. 
+
+Similarly to what I had done in the previous assignment, I showed how to create an interactive shell using python. In this case I used the `sh` command itself to launch an interactive shell. To do this, as can be seen in note (2), I used the `/bin/sh -i` command which spawns an interactive shell. Right after it is executed, as shell is created with the `$` prompt showing. I used `id` to check whether everything is working correctly.
+
+In note (3) we can see the shellcode running as `//bin/sh` with the interactive shell I created as its subprocess. We can also see the nc command running and listening on port 1111.
+
+Finally we can check the connections. In note (4) we see that `nc` is listening on port 1111 and our shell code (marked as `sh`) is connected to our listening `nc` server. 
+
+Using libemu, I generated another graph to see, how it handles the shellcode I created. This time, the flow of the code was much simpler than the one in assignment 1 as there was no fork in this case. However, there was a jump when the connection fails. The same problem occured with libemu showing the code for writing to the screen as a continution after the execve. The graph can be seen below 
+
+<div class="figure">
+<a href="//github.com/reubensammut/SLAE32/raw/master/Assignments/02%20-%20Shell%20Reverse%20Tcp/reversetcp.png">
+<img src="//github.com/reubensammut/SLAE32/raw/master/Assignments/02%20-%20Shell%20Reverse%20Tcp/reversetcp.png">
+</a>
+libemu graph of the reverse tcp shellcode
+</div>
+
+###Port and IP customization
+
+The last requirement for this assignment was to make the port number and the IP address easily customisable. For this requirement I used a similar bash script as the one used in the previous assignment to customise the port. The shell script `reversetcp_config.sh` requires two parameters, the first one being the IP address and the last one being the port number. As per the first assignment, the user using this script to customize the IP and port should take care of removing the null bytes in the customization as the script does do this automatically. What the script does is use the file `reversetcp_conf.shell` and replaces IP\_ADDR\_IP\_ADDR\_ and PORTPORT with the supplied IP and port numbers. The `reversetcp_conf.shell` file was generated and the modified using the `genshell.sh` script described in [this blog post](/slae/2015-11-26-slae_util_scripts.html).
+
+The full code for this assignment, shell script and extra files needed can be found on [my GitHub accout](//github.com/reubensammut/SLAE32/tree/master/Assignments/02%20-Shell%20Reverse%20Tcp).
+
