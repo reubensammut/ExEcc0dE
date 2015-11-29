@@ -84,5 +84,5 @@ libemu graph of the reverse tcp shellcode
 
 The last requirement for this assignment was to make the port number and the IP address easily customisable. For this requirement I used a similar bash script as the one used in the previous assignment to customise the port. The shell script `reversetcp_config.sh` requires two parameters, the first one being the IP address and the last one being the port number. As per the first assignment, the user using this script to customize the IP and port should take care of removing the null bytes in the customization as the script does do this automatically. What the script does is use the file `reversetcp_conf.shell` and replaces IP\_ADDR\_IP\_ADDR\_ and PORTPORT with the supplied IP and port numbers. The `reversetcp_conf.shell` file was generated and the modified using the `genshell.sh` script described in [this blog post](/slae/2015-11-26-slae_util_scripts.html).
 
-The full code for this assignment, shell script and extra files needed can be found on [my GitHub accout](//github.com/reubensammut/SLAE32/tree/master/Assignments/02%20-Shell%20Reverse%20Tcp).
+The full code for this assignment, shell script and extra files needed can be found on [my GitHub accout](//github.com/reubensammut/SLAE32/tree/master/Assignments/02%20-%20Shell%20Reverse%20Tcp).
 
