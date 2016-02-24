@@ -3,3 +3,4 @@ _site
 _cache
 *.swp
 dist
+.DS_Store
