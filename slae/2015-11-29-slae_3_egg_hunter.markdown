@@ -81,9 +81,9 @@ Below is a legend showing the meaning of the colours highlighting the above 3 sh
 Legend showing the meaning of the highlighting colours
 </div>
 
-While the implementations follows the above described algorithm, there are 2 slight differences which can be seen. The first difference is the page alignment (highlighted in dark blue). In memory, is the smallest granular unit is a page. This means that we can assume that addresses in that page are either all valid or all invalid. Hitting an invalid address in a page would most likely mean that all addresses in that page are invalid and so we can move to the next page. By avoiding the whole page incase an address is found to be invalid would highly boost the performance. 
+While the implementations follows the above described algorithm, there are 2 slight differences which can be seen. The first difference is the page alignment (highlighted in dark blue). In memory, the smallest granular unit is a page. This means that we can assume that addresses in that page are either all valid or all invalid. Hitting an invalid address in a page would most likely mean that all addresses in that page are invalid and so we can move to the next page. By avoiding the whole page, incase an address is found to be invalid, would the speed of the egg hunting is highly increased. 
 
-The second difference we see is the egg size. In each implementation, the shellcode looks for the egg appearing 2 times consecutively. Having the egg repeated twice would reduce the chances of finding the egg signature by chance in memory.
+The second difference we see is the egg size. In each implementation, the shellcode looks for the egg appearing 2 times consecutively. Having the egg repeated twice would reduce the chances of finding the egg signature by chance in a place in memory which does not precede our target shellcode.
 
 ####Extra challenge
 
